@@ -1,21 +1,21 @@
 object dm: Tdm
-  Height = 720
-  Width = 960
+  Height = 1080
+  Width = 1440
+  PixelsPerInch = 144
   object conexao: TFDConnection
     Params.Strings = (
-      'Database=C:\etec\Projetos_ETEC_PAM-II_Div1\bdlanchonete.db'
+      'Database=C:\ETEC\Projetos_ETEC_PAM-II_Div2\bdlanchonete.db'
       'DriverID=SQLite')
-    Connected = True
     LoginPrompt = False
-    Left = 75
-    Top = 27
+    Left = 112
+    Top = 40
   end
   object usuario: TFDQuery
     Connection = conexao
     SQL.Strings = (
       'select * from usuarios;')
-    Left = 75
-    Top = 96
+    Left = 112
+    Top = 144
     object usuariousuid: TFDAutoIncField
       FieldName = 'usuid'
       Origin = 'usuid'

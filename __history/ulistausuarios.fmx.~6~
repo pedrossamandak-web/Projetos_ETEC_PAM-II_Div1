@@ -7,7 +7,6 @@ object frmlistausuarios: Tfrmlistausuarios
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
-  OnShow = FormShow
   DesignerMasterStyle = 0
   object Layout1: TLayout
     Align = Client
@@ -40,7 +39,6 @@ object frmlistausuarios: Tfrmlistausuarios
         TabOrder = 0
         Text = 'Button1'
         TextSettings.Trimming = None
-        OnClick = Button1Click
       end
       object Button2: TButton
         Align = Right

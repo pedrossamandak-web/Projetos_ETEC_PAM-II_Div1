@@ -24,9 +24,6 @@ type
     BindingsList1: TBindingsList;
     LinkListControlToField1: TLinkListControlToField;
     procedure Button2Click(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
-
-    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,28 +39,9 @@ implementation
 
 uses umodulo, uiuusuario;
 
-procedure Tfrmlistausuarios.Button1Click(Sender: TObject);
-begin
-close;
-end;
-
 procedure Tfrmlistausuarios.Button2Click(Sender: TObject);
 begin
   frmiuusuario.id := 0;
-  frmiuusuario.Show;
-end;
-
-
-
-procedure Tfrmlistausuarios.FormShow(Sender: TObject);
-begin
-   with dm.usuario do
-   begin
-   close;
-   SQL.Clear;
-   SQL.add('select * from usuarios');
-   open;
-   end;
 end;
 
 end.
