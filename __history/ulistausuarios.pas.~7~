@@ -20,16 +20,13 @@ type
     ListView1: TListView;
     Button1: TButton;
     Button2: TButton;
-    BindSourceDB1: TBindSourceDB;
-    BindingsList1: TBindingsList;
-    LinkListControlToField1: TLinkListControlToField;
     procedure Button2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
-    // ctrl+shift+c
+    //ctrl+shift+c
     procedure carregaDados();
   end;
 
@@ -50,24 +47,19 @@ end;
 
 procedure Tfrmlistausuarios.carregaDados;
 begin
-  // conexao com o servidor da API
-  // dm.RESTClient1.BaseURL := 'http://localhost/Projetos_ETEC_PWEB-III_Div1';
-  // direcionar para a API especifica
-  dm.RESTRequest1.Resource := '/api/susuarios.php';
-  // conectar a API especifica para retornar os dados
-  dm.RESTRequest1.Execute;
+    //conexao com o servidor da API
+    dm.RESTClient1.BaseURL:='http://localhost/Projetos_ETEC_PWEB-III_Div1';
 end;
 
 procedure Tfrmlistausuarios.FormShow(Sender: TObject);
 begin
-  carregaDados;
-  { with dm.usuario do
-    begin
+  {with dm.usuario do
+  begin
     Close;
     SQL.Clear;
     SQL.Add('select * from usuarios;');
     Open;
-    end; }
+  end;  }
 end;
 
 end.

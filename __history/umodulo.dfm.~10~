@@ -1,0 +1,84 @@
+object dm: Tdm
+  Height = 1260
+  Width = 1680
+  PixelsPerInch = 168
+  object conexao: TFDConnection
+    Params.Strings = (
+      'Database=C:\ETEC\Projetos_ETEC_PAM-II_Div2\bdlanchonete.db'
+      'DriverID=SQLite')
+    LoginPrompt = False
+    Left = 131
+    Top = 47
+  end
+  object qusuario: TFDQuery
+    Connection = conexao
+    SQL.Strings = (
+      'select * from usuarios;')
+    Left = 131
+    Top = 168
+    object qusuariousuid: TFDAutoIncField
+      FieldName = 'usuid'
+      Origin = 'usuid'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = False
+    end
+    object qusuariousunome: TWideMemoField
+      FieldName = 'usunome'
+      Origin = 'usunome'
+      BlobType = ftWideMemo
+    end
+    object qusuariousulogin: TWideMemoField
+      FieldName = 'usulogin'
+      Origin = 'usulogin'
+      BlobType = ftWideMemo
+    end
+    object qusuarioususenha: TWideMemoField
+      FieldName = 'ususenha'
+      Origin = 'ususenha'
+      BlobType = ftWideMemo
+    end
+    object qusuariousulogado: TBooleanField
+      FieldName = 'usulogado'
+      Origin = 'usulogado'
+    end
+  end
+  object RESTClient1: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'utf-8, *;q=0.8'
+    BaseURL = 'http://localhost/Projetos_ETEC_PWEB-III_Div1'
+    Params = <>
+    SynchronizedEvents = False
+    Left = 448
+    Top = 16
+  end
+  object RESTRequest1: TRESTRequest
+    Client = RESTClient1
+    Params = <>
+    Response = RESTResponse1
+    SynchronizedEvents = False
+    Left = 448
+    Top = 120
+  end
+  object RESTResponse1: TRESTResponse
+    Left = 448
+    Top = 224
+  end
+  object RESTResponseDataSetAdapter1: TRESTResponseDataSetAdapter
+    Dataset = FDMemTable1
+    FieldDefs = <>
+    ResponseJSON = RESTResponse1
+    Left = 448
+    Top = 336
+  end
+  object FDMemTable1: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 448
+    Top = 440
+  end
+end

@@ -1,0 +1,70 @@
+object dm: Tdm
+  Height = 1260
+  Width = 1680
+  PixelsPerInch = 168
+  object conexao: TFDConnection
+    Params.Strings = (
+      'Database=C:\ETEC\Projetos_ETEC_PAM-II_Div2\bdlanchonete.db'
+      'DriverID=SQLite')
+    LoginPrompt = False
+    Left = 131
+    Top = 47
+  end
+  object usuario: TFDQuery
+    Connection = conexao
+    SQL.Strings = (
+      'select * from usuarios;')
+    Left = 131
+    Top = 168
+    object usuariousuid: TFDAutoIncField
+      FieldName = 'usuid'
+      Origin = 'usuid'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = False
+    end
+    object usuariousunome: TWideMemoField
+      FieldName = 'usunome'
+      Origin = 'usunome'
+      BlobType = ftWideMemo
+    end
+    object usuariousulogin: TWideMemoField
+      FieldName = 'usulogin'
+      Origin = 'usulogin'
+      BlobType = ftWideMemo
+    end
+    object usuarioususenha: TWideMemoField
+      FieldName = 'ususenha'
+      Origin = 'ususenha'
+      BlobType = ftWideMemo
+    end
+    object usuariousulogado: TBooleanField
+      FieldName = 'usulogado'
+      Origin = 'usulogado'
+    end
+  end
+  object RESTClient1: TRESTClient
+    BaseURL = 'http://localhost/Projetos_ETEC_PWEB-III_Div1'
+    Params = <>
+    SynchronizedEvents = False
+    Left = 448
+    Top = 16
+  end
+  object RESTRequest1: TRESTRequest
+    Client = RESTClient1
+    Params = <>
+    Response = RESTResponse1
+    SynchronizedEvents = False
+    Left = 448
+    Top = 120
+  end
+  object RESTResponse1: TRESTResponse
+    Left = 448
+    Top = 224
+  end
+  object RESTResponseDataSetAdapter1: TRESTResponseDataSetAdapter
+    Dataset = usuario
+    FieldDefs = <>
+    Left = 448
+    Top = 328
+  end
+end

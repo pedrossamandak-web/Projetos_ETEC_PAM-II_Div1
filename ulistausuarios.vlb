@@ -14,21 +14,40 @@ Coordinates=10,188,53,33
 Coordinates=30,80,53,51
 
 [ListView1]
-Coordinates=290,130,89,159
+Coordinates=350,70,89,159
 Visible=True
 
 [Layout4]
 Coordinates=210,190,53,33
 
 []
-Coordinates=204,133,91,36
+Coordinates=134,1,82,33
 
 [dm.usuario]
-Coordinates=500,130,69,33
+Coordinates=710,50,69,33
 Visible=False
 
+[dm.usuarios]
+Coordinates=480,70,75,33
+LayerNames=
+Visible=False
+
+[dm.RESTRequest1]
+Coordinates=154,287,106,87
+
+[dm.RESTClient1]
+Coordinates=60,250,94,69
+
+[dm.RESTResponse1]
+Coordinates=740,130,115,303
+
+[Module Settings]
+ModelLayerNames=
+ActiveLayerNames=
+EditingLayerName=
+
 [BindSourceDB1]
-Coordinates=500,110,92,159
+Coordinates=480,70,92,159
 
 [BindingsList1]
 Coordinates=0,0,82,33

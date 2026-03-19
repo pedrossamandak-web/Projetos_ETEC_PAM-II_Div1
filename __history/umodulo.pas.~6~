@@ -14,16 +14,18 @@ uses
 
 type
   Tdm = class(TDataModule)
+    conexao: TFDConnection;
+    qusuario: TFDQuery;
+    qusuariousuid: TFDAutoIncField;
+    qusuariousunome: TWideMemoField;
+    qusuariousulogin: TWideMemoField;
+    qusuarioususenha: TWideMemoField;
+    qusuariousulogado: TBooleanField;
     RESTClient1: TRESTClient;
     RESTRequest1: TRESTRequest;
     RESTResponse1: TRESTResponse;
-    RRDSAusuarios: TRESTResponseDataSetAdapter;
-    usuarios: TFDMemTable;
-    usuariosusuid: TIntegerField;
-    usuariosusunome: TStringField;
-    usuariosusulogin: TStringField;
-    usuariosususenha: TStringField;
-    usuariosusulogado: TBooleanField;
+    RESTResponseDataSetAdapter1: TRESTResponseDataSetAdapter;
+    FDMemTable1: TFDMemTable;
   private
     { Private declarations }
   public

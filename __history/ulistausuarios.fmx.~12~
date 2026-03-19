@@ -84,29 +84,4 @@ object frmlistausuarios: Tfrmlistausuarios
       TabOrder = 2
     end
   end
-  object BindSourceDB1: TBindSourceDB
-    DataSet = dm.usuarios
-    ScopeMappings = <>
-    Left = 304
-    Top = 224
-  end
-  object BindingsList1: TBindingsList
-    Methods = <>
-    OutputConverters = <>
-    Left = 20
-    Top = 5
-    object LinkListControlToField1: TLinkListControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB1
-      FieldName = 'usunome'
-      Control = ListView1
-      FillExpressions = <
-        item
-          SourceMemberName = 'usulogin'
-          ControlMemberName = 'Detail'
-        end>
-      FillHeaderExpressions = <>
-      FillBreakGroups = <>
-    end
-  end
 end

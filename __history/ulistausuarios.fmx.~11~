@@ -1,12 +1,14 @@
-object Form1: TForm1
+object frmlistausuarios: Tfrmlistausuarios
   Left = 0
   Top = 0
   Caption = 'Form1'
   ClientHeight = 480
   ClientWidth = 640
+  Position = ScreenCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnShow = FormShow
   DesignerMasterStyle = 0
   object Layout1: TLayout
     Align = Client
@@ -50,6 +52,7 @@ object Form1: TForm1
         TabOrder = 1
         Text = 'Button2'
         TextSettings.Trimming = None
+        OnClick = Button2Click
       end
     end
     object Layout3: TLayout
@@ -59,8 +62,8 @@ object Form1: TForm1
       Size.PlatformDefault = False
       TabOrder = 1
       object ListView1: TListView
-        ItemAppearanceClassName = 'TListItemAppearance'
-        ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+        ItemAppearanceClassName = 'TListItemRightDetailAppearance'
+        ItemEditAppearanceClassName = 'TListItemRightDetailDeleteAppearance'
         HeaderAppearanceClassName = 'TListHeaderObjects'
         FooterAppearanceClassName = 'TListHeaderObjects'
         Align = Client

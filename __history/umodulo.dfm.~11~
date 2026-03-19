@@ -2,6 +2,46 @@ object dm: Tdm
   Height = 1260
   Width = 1680
   PixelsPerInch = 168
+  object conexao: TFDConnection
+    Params.Strings = (
+      'Database=C:\ETEC\Projetos_ETEC_PAM-II_Div2\bdlanchonete.db'
+      'DriverID=SQLite')
+    LoginPrompt = False
+    Left = 131
+    Top = 47
+  end
+  object usuario: TFDQuery
+    Connection = conexao
+    SQL.Strings = (
+      'select * from usuarios;')
+    Left = 131
+    Top = 168
+    object usuariousuid: TFDAutoIncField
+      FieldName = 'usuid'
+      Origin = 'usuid'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = False
+    end
+    object usuariousunome: TWideMemoField
+      FieldName = 'usunome'
+      Origin = 'usunome'
+      BlobType = ftWideMemo
+    end
+    object usuariousulogin: TWideMemoField
+      FieldName = 'usulogin'
+      Origin = 'usulogin'
+      BlobType = ftWideMemo
+    end
+    object usuarioususenha: TWideMemoField
+      FieldName = 'ususenha'
+      Origin = 'ususenha'
+      BlobType = ftWideMemo
+    end
+    object usuariousulogado: TBooleanField
+      FieldName = 'usulogado'
+      Origin = 'usulogado'
+    end
+  end
   object RESTClient1: TRESTClient
     Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
     AcceptCharset = 'utf-8, *;q=0.8'
@@ -14,7 +54,6 @@ object dm: Tdm
   object RESTRequest1: TRESTRequest
     Client = RESTClient1
     Params = <>
-    Resource = 'api/susuarios.php'
     Response = RESTResponse1
     SynchronizedEvents = False
     Left = 448
@@ -41,23 +80,5 @@ object dm: Tdm
     UpdateOptions.AutoCommitUpdates = True
     Left = 448
     Top = 440
-    object usuariosusuid: TIntegerField
-      FieldName = 'usuid'
-    end
-    object usuariosusunome: TStringField
-      FieldName = 'usunome'
-      Size = 150
-    end
-    object usuariosusulogin: TStringField
-      FieldName = 'usulogin'
-      Size = 150
-    end
-    object usuariosususenha: TStringField
-      FieldName = 'ususenha'
-      Size = 150
-    end
-    object usuariosusulogado: TBooleanField
-      FieldName = 'usulogado'
-    end
   end
 end

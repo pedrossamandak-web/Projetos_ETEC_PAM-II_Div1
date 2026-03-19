@@ -20,9 +20,6 @@ type
     ListView1: TListView;
     Button1: TButton;
     Button2: TButton;
-    BindSourceDB1: TBindSourceDB;
-    BindingsList1: TBindingsList;
-    LinkListControlToField1: TLinkListControlToField;
     procedure Button2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
