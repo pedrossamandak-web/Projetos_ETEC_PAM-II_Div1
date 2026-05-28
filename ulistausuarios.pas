@@ -23,8 +23,12 @@ type
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     LinkListControlToField1: TLinkListControlToField;
+    Button3: TButton;
     procedure Button2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure ListView1ItemClickEx(const Sender: TObject; ItemIndex: Integer;
+      const LocalClickPos: TPointF; const ItemObject: TListItemDrawable);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,17 +53,24 @@ begin
   frmiuusuario.Show;
 end;
 
+procedure Tfrmlistausuarios.Button3Click(Sender: TObject);
+begin
+  frmiuusuario.Show;
+end;
+
 procedure Tfrmlistausuarios.carregaDados;
 begin
   try
     jsnobj := TJSONObject.Create;
-    jsnobj.AddPair('op', 'l');
-    jsnobj.AddPair('nome', '');
+    // jsnobj.AddPair('op', 'sp');
+    // jsnobj.AddPair('nome', '');
     // conexao com o servidor da API
     // dm.RESTClient1.BaseURL := 'http://localhost/Projetos_ETEC_PWEB-III_Div1';
     // direcionar para a API especifica
-    dm.RESTRequest1.Resource := '/usuarios/?jsn={parametro}';
+    // dm.RESTRequest1.Resource := '/usuarios/?jsn={parametro}';//{"op":"sp","nome":""}
+    // dm.RESTRequest1.Params.AddUrlSegment('parametro', jsnobj.ToString);
     // conectar a API especifica para retornar os dados
+    dm.RESTRequest1.Resource := '/usuarios/susuarios.php';
     dm.RESTRequest1.Execute;
   finally
     jsnobj.DisposeOf;
@@ -69,13 +80,18 @@ end;
 procedure Tfrmlistausuarios.FormShow(Sender: TObject);
 begin
   carregaDados;
-  { with dm.usuario do
-    begin
-    Close;
-    SQL.Clear;
-    SQL.Add('select * from usuarios;');
-    Open;
-    end; }
+end;
+
+procedure Tfrmlistausuarios.ListView1ItemClickEx(const Sender: TObject;
+  ItemIndex: Integer; const LocalClickPos: TPointF;
+  const ItemObject: TListItemDrawable);
+begin
+  ListView1.tag := dm.usuariosid.AsInteger;
+  dm.usuarios.Locate('id', ListView1.tag, []);
+  frmiuusuario.id := dm.usuariosid.AsInteger;
+  frmiuusuario.edtusunome.Text := dm.usuariosnome.AsString;
+  frmiuusuario.edtusulogin.Text := dm.usuariosusuario.AsString;
+  frmiuusuario.swtlogado.IsChecked := dm.usuarioslogado.AsInteger.ToBoolean;
 end;
 
 end.

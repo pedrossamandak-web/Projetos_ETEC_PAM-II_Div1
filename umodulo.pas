@@ -22,7 +22,7 @@ type
     usuariosid: TIntegerField;
     usuariosnome: TStringField;
     usuariosusuario: TStringField;
-    usuarioslogado: TBooleanField;
+    usuarioslogado: TIntegerField;
   private
     { Private declarations }
   public
