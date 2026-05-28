@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes,
   System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Layouts,
-  FMX.Controls.Presentation, FMX.Edit, FMX.StdCtrls;
+  FMX.Controls.Presentation, FMX.Edit, FMX.StdCtrls, System.JSON;
 
 type
   Tfrmiuusuario = class(TForm)
@@ -18,15 +18,16 @@ type
     edtusulogin: TEdit;
     edtususenha: TEdit;
     Layout5: TLayout;
+    Layout6: TLayout;
     btngravar: TButton;
+    swtlogado: TSwitch;
     procedure btngravarClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
+    jsnobj: TJSONObject;
   public
     { Public declarations }
     id: integer;
-    logado: boolean;
   end;
 
 var
@@ -36,49 +37,33 @@ implementation
 
 {$R *.fmx}
 
-uses umodulo;
+uses umodulo, ulistausuarios;
 
 procedure Tfrmiuusuario.btngravarClick(Sender: TObject);
 begin
-  {// enquanto eu estiver na query faça:
-  with dm.usuario do
-  begin
-    Close;
-    SQL.Clear;
-    if (id = 0) then
+    jsnobj:= TJSONObject.create;
+
+    jsnobj.addpair('nome',edtusunome.text);
+    jsnobj.addpair('login',edtusulogin.text);
+    jsnobj.addpair('senha',edtususenha.text);
+
+    if (id<>0) then
     begin
-      SQL.Add('insert into usuarios(usunome,usulogin,ususenha)values(:usunome,:usulogin,:ususenha);');
+    jsnobj.addpair('id',id);
+    jsnobj.addpair('logado',swtlogado.ischecked.tointeger);
+    dm.RESTRequest1.Resource := '/usuarios/uusuario.php?jsn={parametro}'; //{"op":"sp","nome":""}
+    dm.RESTRequest1.Params.AddUrlSegment('parametro',jsnobj.ToString);
     end
     else
     begin
-      SQL.Add('update usuarios set usunome=:usunome,usulogin=:usulogin,ususenha=:ususenha where usuid=:usuid');
-      ParamByName('usuid').Value := id;
+     dm.RESTRequest1.Resource := '/usuarios/iusuario.php?jsn={parametro}'; //{"op":"sp","nome":""}
+    dm.RESTRequest1.Params.AddUrlSegment('parametro',jsnobj.ToString);
     end;
-
-    ParamByName('usunome').Value := edtusunome.Text;
-    ParamByName('usulogin').Value := edtusulogin.Text;
-    ParamByName('ususenha').Value := edtususenha.Text;
-
-    ExecSQL;
-  end;       }
+    showmessage(jsnobj.ToString) ;
+    dm.RESTRequest1.execute;
+    frmlistausuarios.carregaDados;
+    close;
 end;
 
-procedure Tfrmiuusuario.FormShow(Sender: TObject);
-begin
-  {if (id <> 0) then
-  begin
-    with dm.usuario do
-    begin
-      Close;
-      SQL.Clear;
-      SQL.Add('select * from usuarios where usuid = :id;');
-      ParamByName('id').Value := id;
-      Open;
-    end;
-    edtusunome.Text := dm.usuariousunome.AsString;
-    edtusulogin.Text := dm.usuariousulogin.AsString;
-    edtususenha.Text := dm.usuarioususenha.AsString;
-  end;      }
-end;
 
 end.

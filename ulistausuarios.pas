@@ -23,8 +23,12 @@ type
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     LinkListControlToField1: TLinkListControlToField;
-    procedure Button2Click(Sender: TObject);
+    Button3: TButton;
     procedure FormShow(Sender: TObject);
+    procedure ListView1ItemClickEx(const Sender: TObject; ItemIndex: Integer;
+      const LocalClickPos: TPointF; const ItemObject: TListItemDrawable);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -43,23 +47,32 @@ implementation
 
 uses umodulo, uiuusuario;
 
+
+
 procedure Tfrmlistausuarios.Button2Click(Sender: TObject);
 begin
   frmiuusuario.id := 0;
   frmiuusuario.Show;
 end;
 
+procedure Tfrmlistausuarios.Button3Click(Sender: TObject);
+begin
+frmiuusuario.Show;
+end;
+
 procedure Tfrmlistausuarios.carregaDados;
 begin
   try
     jsnobj := TJSONObject.Create;
-    jsnobj.AddPair('op', 'l');
-    jsnobj.AddPair('nome', '');
+    //jsnobj.AddPair('op', 'sp');
+    //jsnobj.AddPair('nome', '');
     // conexao com o servidor da API
     // dm.RESTClient1.BaseURL := 'http://localhost/Projetos_ETEC_PWEB-III_Div1';
     // direcionar para a API especifica
-    dm.RESTRequest1.Resource := '/usuarios/?jsn={parametro}';
+    //dm.RESTRequest1.Resource := '/usuarios/?jsn={parametro}'; //{"op":"sp","nome":""}
+    //dm.RESTRequest1.Params.AddUrlSegment('parametro',jsnobj.ToString);
     // conectar a API especifica para retornar os dados
+    dm.RESTRequest1.Resource := '/usuarios/susuarios.php';
     dm.RESTRequest1.Execute;
   finally
     jsnobj.DisposeOf;
@@ -69,13 +82,21 @@ end;
 procedure Tfrmlistausuarios.FormShow(Sender: TObject);
 begin
   carregaDados;
-  { with dm.usuario do
-    begin
-    Close;
-    SQL.Clear;
-    SQL.Add('select * from usuarios;');
-    Open;
-    end; }
+
+end;
+
+procedure Tfrmlistausuarios.ListView1ItemClickEx(const Sender: TObject;
+  ItemIndex: Integer; const LocalClickPos: TPointF;
+  const ItemObject: TListItemDrawable);
+begin
+listview1.tag := dm.usuariosid.asinteger;
+dm.usuarios.locate('id', listview1.tag, []);
+  frmiuusuario.id := dm.usuariosid.asinteger;
+  frmiuusuario.edtusunome.text := dm.usuariosnome.asstring;
+  frmiuusuario.edtusulogin.text := dm.usuariosusuario.asstring;
+  frmiuusuario.swtlogado.ischecked := dm.usuarioslogado.asinteger.toboolean;
+
+
 end;
 
 end.
