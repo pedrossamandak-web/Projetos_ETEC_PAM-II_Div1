@@ -20,7 +20,6 @@ type
     Layout5: TLayout;
     Layout6: TLayout;
     btngravar: TButton;
-    swtlogado: TSwitch;
     procedure btngravarClick(Sender: TObject);
   private
     { Private declarations }
@@ -48,7 +47,6 @@ begin
   if (id <> 0) then
   begin
     jsnobj.AddPair('id', id);
-    jsnobj.AddPair('logado', swtlogado.IsChecked.ToInteger);
     dm.RESTRequest1.Resource := '/usuarios/uusuario.php?jsn={parametro}';
     dm.RESTRequest1.Params.AddUrlSegment('parametro', jsnobj.ToString);
   end

@@ -91,7 +91,6 @@ begin
   frmiuusuario.id := dm.usuariosid.AsInteger;
   frmiuusuario.edtusunome.Text := dm.usuariosnome.AsString;
   frmiuusuario.edtusulogin.Text := dm.usuariosusuario.AsString;
-  frmiuusuario.swtlogado.IsChecked := dm.usuarioslogado.AsInteger.ToBoolean;
 end;
 
 end.

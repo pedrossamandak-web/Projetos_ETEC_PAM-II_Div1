@@ -52,18 +52,18 @@ procedure Tfrmacesso.geraJSON;
 begin
   try
     jsnobj := TJSONObject.Create;
-    jsnobj.AddPair('op','l');
+    //jsnobj.AddPair('op','l');
     jsnobj.AddPair('usuario', edtusuario.Text);
     jsnobj.AddPair('senha', edtsenha.Text);
     { chamada da API }
-    dm.RESTRequest1.Resource := '/usuarios/?jsn={parametro}';
+    dm.RESTRequest1.Resource := '/usuarios/login.php?jsn={parametro}';
     { jsnobj.ToString -> pega os dados e transforma em
       {"usuario":"valor","senha":"valor" }// }
     //ShowMessage(jsnobj.ToString);
      dm.RESTRequest1.Params.AddUrlSegment('parametro', jsnobj.ToString);
      dm.RESTRequest1.Execute;
      //carga do usuário logado
-      ShowMessage(IntToStr(dm.usuariosid.AsInteger));
+      ShowMessage(IntToStr(dm.usuariosid.AsInteger) + '-' + dm.usuariosnome.AsString);
   finally
     jsnobj.DisposeOf;
   end;

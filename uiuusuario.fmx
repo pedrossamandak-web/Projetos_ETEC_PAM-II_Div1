@@ -103,12 +103,6 @@ object frmiuusuario: Tfrmiuusuario
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 3
-      object swtlogado: TSwitch
-        IsChecked = False
-        Position.X = 280.000000000000000000
-        Position.Y = 16.000000000000000000
-        TabOrder = 0
-      end
     end
     object Layout6: TLayout
       Align = Bottom
