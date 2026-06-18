@@ -1,34 +1,33 @@
 object dm: Tdm
-  Height = 900
-  Width = 1200
-  PixelsPerInch = 120
+  Height = 720
+  Width = 960
   object RESTClient1: TRESTClient
     Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
     AcceptCharset = 'utf-8, *;q=0.8'
-    BaseURL = 'http://127.0.0.1/Projetos_ETEC_PWEB-III_Div1/api'
+    BaseURL = 'http://127.0.0.1/API-PWEB/api'
     Params = <>
     SynchronizedEvents = False
-    Left = 320
-    Top = 12
+    Left = 256
+    Top = 10
   end
   object RESTRequest1: TRESTRequest
     Client = RESTClient1
     Params = <>
     Response = RESTResponse1
     SynchronizedEvents = False
-    Left = 320
-    Top = 86
+    Left = 256
+    Top = 69
   end
   object RESTResponse1: TRESTResponse
-    Left = 320
-    Top = 160
+    Left = 256
+    Top = 128
   end
   object RRDSAusuarios: TRESTResponseDataSetAdapter
     Dataset = usuarios
     FieldDefs = <>
     ResponseJSON = RESTResponse1
-    Left = 320
-    Top = 240
+    Left = 256
+    Top = 192
   end
   object usuarios: TFDMemTable
     FetchOptions.AssignedValues = [evMode]
@@ -38,8 +37,8 @@ object dm: Tdm
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 320
-    Top = 314
+    Left = 256
+    Top = 251
     object usuariosid: TIntegerField
       FieldName = 'id'
     end
@@ -53,6 +52,48 @@ object dm: Tdm
     end
     object usuarioslogado: TIntegerField
       FieldName = 'logado'
+    end
+  end
+  object conexao: TFDConnection
+    Params.Strings = (
+      
+        'Database=C:\Users\Aluno\Downloads\Projetos_ETEC_PAM-II_Div1\bdla' +
+        'nchonete.db'
+      'DriverID=SQLite')
+    Connected = True
+    LoginPrompt = False
+    Left = 400
+    Top = 16
+  end
+  object ValidaEntrada: TFDQuery
+    Connection = conexao
+    SQL.Strings = (
+      'select * from usuarios')
+    Left = 400
+    Top = 88
+    object ValidaEntradausuid: TIntegerField
+      FieldName = 'usuid'
+      Origin = 'usuid'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object ValidaEntradausunome: TWideMemoField
+      FieldName = 'usunome'
+      Origin = 'usunome'
+      BlobType = ftWideMemo
+    end
+    object ValidaEntradausulogin: TWideMemoField
+      FieldName = 'usulogin'
+      Origin = 'usulogin'
+      BlobType = ftWideMemo
+    end
+    object ValidaEntradaususenha: TWideMemoField
+      FieldName = 'ususenha'
+      Origin = 'ususenha'
+      BlobType = ftWideMemo
+    end
+    object ValidaEntradausulogado: TBooleanField
+      FieldName = 'usulogado'
+      Origin = 'usulogado'
     end
   end
 end

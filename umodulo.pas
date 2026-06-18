@@ -23,6 +23,13 @@ type
     usuariosnome: TStringField;
     usuariosusuario: TStringField;
     usuarioslogado: TIntegerField;
+    conexao: TFDConnection;
+    ValidaEntrada: TFDQuery;
+    ValidaEntradausuid: TIntegerField;
+    ValidaEntradausunome: TWideMemoField;
+    ValidaEntradausulogin: TWideMemoField;
+    ValidaEntradaususenha: TWideMemoField;
+    ValidaEntradausulogado: TBooleanField;
   private
     { Private declarations }
   public

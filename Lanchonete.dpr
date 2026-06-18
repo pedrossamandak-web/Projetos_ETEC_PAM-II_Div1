@@ -7,7 +7,8 @@ uses
   umodulo in 'umodulo.pas' {dm: TDataModule},
   uiuusuario in 'uiuusuario.pas' {frmiuusuario},
   ulistausuarios in 'ulistausuarios.pas' {frmlistausuarios},
-  uwebview in 'uwebview.pas' {frmwebview};
+  uwebview in 'uwebview.pas' {frmwebview},
+  umenu in 'umenu.pas' {frmmenu};
 
 {$R *.res}
 
@@ -18,5 +19,6 @@ begin
   Application.CreateForm(Tfrmwebview, frmwebview);
   Application.CreateForm(Tfrmiuusuario, frmiuusuario);
   Application.CreateForm(Tdm, dm);
+  Application.CreateForm(Tfrmmenu, frmmenu);
   Application.Run;
 end.
